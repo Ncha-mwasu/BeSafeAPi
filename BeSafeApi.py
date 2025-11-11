@@ -82,7 +82,7 @@ def tokenize_texts(texts: List[str], max_length: int = 128):
 async def lifespan(app: FastAPI):
     global onnx_session, tokenizer
 
-    logger.info("🚀 Starting up Threat Detection API...")
+    logger.info("Starting up Threat Detection API...")
     try:
         onnx_session = ort.InferenceSession(MODEL_PATH, providers=["CPUExecutionProvider"])
         logger.info("Model loaded successfully.")
@@ -97,10 +97,10 @@ async def lifespan(app: FastAPI):
 
     yield  # <-- Application runs between startup and shutdown
 
-    logger.info("🧹 Cleaning up resources...")
+    logger.info("Cleaning up resources...")
     onnx_session = None
     tokenizer = None
-    logger.info("👋 Shutdown complete.")
+    logger.info("Shutdown complete.")
 
 
 app = FastAPI(
@@ -253,6 +253,7 @@ if __name__ == "__main__":
     import uvicorn
     import threading
     import time
+    
     def run_server():
         uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
         
